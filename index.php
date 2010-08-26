@@ -27,7 +27,7 @@
 		</script>
     </head>
     <body>
-        <canvas id="field" width="400px" height="400px"></canvas>
+        <canvas id="field" width="800px" height="800px"></canvas>
 
     </body>
 </html>

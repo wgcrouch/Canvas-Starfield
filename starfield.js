@@ -1,17 +1,17 @@
+/*global jQuery:false */
 
-
-var Starfield = function(options) {
+function Starfield(options) {
 
 	var starfield = {};
 
 	//Merge default settings with settings that have been passed in
 	var settings = jQuery.extend({
 		context: null,  //Canvas context
-		height : 400,   //Height of the context
-		width  : 400,   //Width of the context
+		height : 800,   //Height of the context
+		width  : 800,   //Width of the context
 		focal_length : 50,
 		max_z : 600,
-		star_count : 40,
+		star_count : 100,
 		speed : 5,
 		star_width : 8
 	},
@@ -26,17 +26,17 @@ var Starfield = function(options) {
 	for (var i = 0; i < settings.star_count; i++) {
 		stars[i] = {};
 		stars[i].x = -origin.x + Math.floor(Math.random() * settings.width);
-		stars[i].y = -origin.y + Math.floor(Math.random() * settings.height),
+		stars[i].y = -origin.y + Math.floor(Math.random() * settings.height);
 		stars[i].z = Math.floor(Math.random() * settings.max_z);
 	}
 
-
+	var context =  settings.context;
 
 	starfield.draw = function()
 	{
 		context.fillStyle = '#FFF';
 		for (var i = 0; i < settings.star_count; i++) {
-			star = stars[i];
+			var star = stars[i];
 			var scale_ratio = settings.focal_length / (settings.focal_length + star.z);
 			var x = origin.x + star.x * scale_ratio;
 			var y = origin.y + star.y * scale_ratio;
@@ -44,7 +44,7 @@ var Starfield = function(options) {
 			var h = w;			
 			context.fillRect(x, y, w, h);
 		}
-	}
+	};
 
 	starfield.update = function()
 	{
@@ -56,7 +56,7 @@ var Starfield = function(options) {
 			}
 		}
 		starfield.draw();
-	}
+	};
 
 	starfield.clear = function() {
 		context.fillStyle = '#000';
@@ -65,7 +65,7 @@ var Starfield = function(options) {
 	return starfield;
 }
 
-var Star = new function() {
+function Star() {
 
 	var star = {};
 	
